@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS INFRA & NET | Penyedia WiFi, Mekanikal Elektrikal & Keamanan Jaringan</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Konfigurasi Tailwind Custom -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        nexus: {
+                            dark: '#060B19',
+                            card: '#0D1528',
+                            border: '#1E293B',
+                            cyan: '#00E5FF',
+                            indigo: '#6366F1',
+                            emerald: '#10B981'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #060B19;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(13, 21, 40, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card {
+            background: linear-gradient(145deg, rgba(17, 27, 51, 0.8) 0%, rgba(10, 16, 32, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 229, 255, 0.12);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 229, 255, 0.45);
+            box-shadow: 0 10px 35px -10px rgba(0, 229, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        /* Background Grid Pattern */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #00E5FF 0%, #818CF8 50%, #34D399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Range Slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #1E293B;
+            height: 8px;
+            border-radius: 999px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #00E5FF;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-grid selection:bg-cyan-500/30 selection:text-cyan-200">
+
+    <!-- ==================== 1. NAVBAR STICKY & RESPONSIF ==================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-slate-800/80 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo Perusahaan -->
+                <a href="#beranda" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+                        <i data-lucide="cpu" class="w-6 h-6 text-slate-950"></i>
+                    </div>
+                    <div>
+                        <span class="font-display font-extrabold text-xl tracking-tight text-white block leading-none">
+                            NEXUS <span class="text-cyan-400">INFRA</span>
+                        </span>
+                        <span class="text-[10px] font-medium tracking-widest text-slate-400 uppercase">&amp; NET SECURITY</span>
+                    </div>
+                </a>
+
+                <!-- Menu Navigasi Desktop -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
+                    <a href="#beranda" class="hover:text-cyan-400 transition-colors">Beranda</a>
+                    <a href="#layanan" class="hover:text-cyan-400 transition-colors">3 Pilar Layanan</a>
+                    <a href="#paket" class="hover:text-cyan-400 transition-colors">Paket WiFi</a>
+                    <a href="#kalkulator" class="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                        <span>Kalkulator</span>
+                        <span class="px-1.5 py-0.5 text-[10px] bg-cyan-500/20 text-cyan-300 rounded-md border border-cyan-500/30">Interaktif</span>
+                    </a>
+                    <a href="#keunggulan" class="hover:text-cyan-400 transition-colors">Keunggulan</a>
+                    <a href="#portofolio" class="hover:text-cyan-400 transition-colors">Portofolio</a>
+                </nav>
+
+                <!-- Tombol CTA & Mobile Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#konsultasi" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-semibold text-sm shadow-lg shadow-cyan-500/25 transition-all hover:scale-[1.02]">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span>Konsultasi Gratis</span>
+                    </a>
+
+                    <!-- Hamburger Button Mobile -->
+                    <button id="mobile-menu-btn" aria-label="Buka Menu" class="lg:hidden p-2.5 rounded-xl bg-slate-800/80 text-slate-200 hover:text-cyan-400 border border-slate-700">
+                        <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden glass border-t border-slate-800 px-4 pt-3 pb-6 space-y-2">
+            <a href="#beranda" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400 font-medium">Beranda</a>
+            <a href="#layanan" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400 font-medium">Layanan (WiFi, ME &amp; Security)</a>
+            <a href="#paket" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400 font-medium">Paket WiFi &amp; Infrastruktur</a>
+            <a href="#kalkulator" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400 font-medium">Kalkulator Kebutuhan</a>
+            <a href="#keunggulan" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400 font-medium">Keunggulan &amp; SLA</a>
+            <a href="#portofolio" class="mobile-link block px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800/60 hover:text-cyan-400 font-medium">Portofolio Proyek</a>
+            <div class="pt-2">
+                <a href="#konsultasi" class="mobile-link flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 font-bold">
+                    <i data-lucide="calendar-check" class="w-4 h-4"></i>
+                    <span>Jadwalkan Survei &amp; Konsultasi</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. HERO SECTION ==================== -->
+    <section id="beranda" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <!-- Ambient Glow Orbs -->
+        <div class="absolute top-20 left-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-1/4 w-96 h-96 bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Kolom Kiri: Copywriting & CTA -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-emerald-500/30 text-xs font-medium text-emerald-400 shadow-sm">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                        <span>NOC &amp; SOC Aktif 24/7 • Proteksi Jaringan Enterprise</span>
+                    </div>
+
+                    <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-[1.12]">
+                        Konektivitas Ultra-Cepat, Daya Andal &amp; <span class="text-gradient">Keamanan Tanpa Celah.</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Solusi satu pintu untuk infrastruktur <strong class="text-slate-200">Fiber WiFi Enterprise</strong>, instalasi <strong class="text-slate-200">Mekanikal Elektrikal (ME)</strong> berstandar industri, dan pertahanan <strong class="text-slate-200">Cyber &amp; Network Security</strong> terintegrasi.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#kalkulator" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 transition-all hover:scale-[1.02]">
+                            <i data-lucide="calculator" class="w-5 h-5"></i>
+                            <span>Hitung Kebutuhan Infrastruktur</span>
+                        </a>
+                        <a href="#layanan" class="w-full sm:w-auto px-7 py-4 rounded-2xl glass hover:bg-slate-800/80 text-white font-semibold text-sm sm:text-base flex items-center justify-center gap-2 border border-slate-700 transition-all">
+                            <span>Jelajahi Solusi Kami</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-cyan-400"></i>
+                        </a>
+                    </div>
+
+                    <!-- Live Statistics -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 max-w-xl mx-auto lg:mx-0">
+                        <div>
+                            <div class="font-display font-extrabold text-2xl sm:text-3xl text-white">99.98<span class="text-cyan-400">%</span></div>
+                            <div class="text-xs sm:text-sm text-slate-400 mt-1">Garansi SLA Uptime</div>
+                        </div>
+                        <div>
+                            <div class="font-display font-extrabold text-2xl sm:text-3xl text-white">24<span class="text-emerald-400">/7</span></div>
+                            <div class="text-xs sm:text-sm text-slate-400 mt-1">Proteksi Anti-DDoS</div>
+                        </div>
+                        <div>
+                            <div class="font-display font-extrabold text-2xl sm:text-3xl text-white">250<span class="text-indigo-400">+</span></div>
+                            <div class="text-xs sm:text-sm text-slate-400 mt-1">Proyek Infrastruktur</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Visualisasi Topologi Jaringan & ME Interaktif -->
+                <div class="lg:col-span-5">
+                    <div class="relative glass-card rounded-3xl p-6 sm:p-8 animate-float border border-cyan-500/25">
+                        <!-- Header Terminal/Dashboard Mini -->
+                        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                <span class="ml-2 text-xs font-mono text-slate-400">nexus-core-monitor.sys</span>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[11px] font-semibold border border-emerald-500/30">
+                                SYSTEM OPTIMAL
+                            </span>
+                        </div>
+
+                        <!-- Interactive Canvas / SVG Network Topology -->
+                        <div class="relative w-full h-56 rounded-2xl bg-slate-950/90 border border-slate-800/90 overflow-hidden mb-6 flex items-center justify-center">
+                            <canvas id="networkCanvas" class="w-full h-full block"></canvas>
+                            <!-- Overlay Info Node -->
+                            <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono bg-slate-900/85 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-800">
+                                <span class="text-cyan-400">FIBER: 10 Gbps Backbone</span>
+                                <span class="text-emerald-400">FIREWALL: Active</span>
+                            </div>
+                        </div>
+
+                        <!-- 3 Indikator Pilar Real-time -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 rounded-lg bg-cyan-500/15 text-cyan-400">
+                                        <i data-lucide="wifi" class="w-4 h-4"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-white">Latency Backbone</div>
+                                        <div class="text-[11px] text-slate-400">IIX &amp; Global Transit</div>
+                                    </div>
+                                </div>
+                                <span class="font-mono text-sm font-bold text-cyan-400" id="live-ping">2.4 ms</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 rounded-lg bg-indigo-500/15 text-indigo-400">
+                                        <i data-lucide="zap" class="w-4 h-4"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-white">Daya &amp; Redundansi UPS</div>
+                                        <div class="text-[11px] text-slate-400">N+1 Power Load Balance</div>
+                                    </div>
+                                </div>
+                                <span class="font-mono text-sm font-bold text-indigo-400">99.9% Stabil</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 rounded-lg bg-emerald-500/15 text-emerald-400">
+                                        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-semibold text-white">Ancaman Diblokir Hari Ini</div>
+                                        <div class="text-[11px] text-slate-400">Next-Gen AI Intrusion Prevention</div>
+                                    </div>
+                                </div>
+                                <span class="font-mono text-sm font-bold text-emerald-400" id="live-blocked">14,892</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3. 3 PILAR LAYANAN UTAMA (INTERACTIVE TABS) ==================== -->
+    <section id="layanan" class="py-20 lg:py-28 relative border-t border-slate-800/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase">Ekosistem Terpadu</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                    3 Pilar Infrastruktur Bisnis Modern
+                </h2>
+                <p class="text-slate-400 mt-4 text-sm sm:text-base">
+                    Kami merancang, membangun, dan memelihara tulang punggung digital serta kelistrikan gedung Anda agar beroperasi tanpa henti.
+                </p>
+            </div>
+
+            <!-- Interactive Tab Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" role="tablist">
+                <button onclick="switchServiceTab('wifi')" id="tab-btn-wifi" class="service-tab-btn active flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-all bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25">
+                    <i data-lucide="wifi" class="w-5 h-5"></i>
+                    <span>Enterprise &amp; Home Fiber WiFi</span>
+                </button>
+                <button onclick="switchServiceTab('me')" id="tab-btn-me" class="service-tab-btn flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-all glass text-slate-300 hover:text-white border border-slate-700">
+                    <i data-lucide="zap" class="w-5 h-5 text-indigo-400"></i>
+                    <span>Mekanikal &amp; Elektrikal (ME)</span>
+                </button>
+                <button onclick="switchServiceTab('security')" id="tab-btn-security" class="service-tab-btn flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-all glass text-slate-300 hover:text-white border border-slate-700">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+                    <span>Network &amp; Cyber Security</span>
+                </button>
+            </div>
+
+            <!-- Tab Content Container -->
+            <div id="service-tab-content" class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-800">
+                <!-- Content diisi oleh JavaScript agar interaktif dan bersih -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. PAKET LAYANAN WIFI & INFRASTRUKTUR ==================== -->
+    <section id="paket" class="py-20 lg:py-28 bg-slate-950/60 border-t border-slate-800/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+                <div>
+                    <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase">Paket Berlangganan</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                        Pilihan Paket WiFi &amp; Proteksi
+                    </h2>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base max-w-xl">
+                        Setiap paket sudah dilengkapi enkripsi jaringan standar dan opsi integrasi backup daya UPS.
+                    </p>
+                </div>
+
+                <!-- Toggle Switch: Bisnis vs Residensial/SOHO -->
+                <div class="inline-flex items-center p-1.5 rounded-2xl glass border border-slate-700 self-start">
+                    <button onclick="togglePricingCategory('bisnis')" id="btn-cat-bisnis" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950 transition-all">
+                        Bisnis &amp; Enterprise
+                    </button>
+                    <button onclick="togglePricingCategory('soho')" id="btn-cat-soho" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white transition-all">
+                        Residensial &amp; Ruko
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid Kartu Harga -->
+            <div id="pricing-cards-grid" class="grid md:grid-cols-3 gap-8">
+                <!-- Diisi secara dinamis oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. KALKULATOR ESTIMASI KEBUTUHAN INFRASTRUKTUR ==================== -->
+    <section id="kalkulator" class="py-20 lg:py-28 relative border-t border-slate-800/70">
+        <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-indigo-500/5 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="px-3 py-1 rounded-full bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 text-xs font-bold uppercase tracking-wider">
+                    Simulasi Cerdas
+                </span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-3">
+                    Kalkulator Kebutuhan WiFi, ME &amp; Security
+                </h2>
+                <p class="text-slate-400 mt-3 text-sm sm:text-base">
+                    Sesuaikan parameter bangunan dan jumlah perangkat Anda untuk mendapatkan rekomendasi spesifikasi teknis serta estimasi investasi awal secara instan.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <!-- Panel Input Parameter (Kiri) -->
+                <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-7">
+                    <!-- 1. Jenis Bangunan -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-3">1. Pilih Jenis Bangunan / Lokasi</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="building-type-group">
+                            <button type="button" data-building="kantor" data-mult="1.2" class="building-btn active p-3.5 rounded-2xl border border-cyan-500 bg-cyan-500/15 text-white text-center transition-all">
+                                <i data-lucide="building-2" class="w-6 h-6 mx-auto mb-1.5 text-cyan-400"></i>
+                                <span class="text-xs font-semibold block">Kantor / Office</span>
+                            </button>
+                            <button type="button" data-building="pabrik" data-mult="1.6" class="building-btn p-3.5 rounded-2xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-slate-500 text-center transition-all">
+                                <i data-lucide="factory" class="w-6 h-6 mx-auto mb-1.5 text-indigo-400"></i>
+                                <span class="text-xs font-semibold block">Pabrik / Gudang</span>
+                            </button>
+                            <button type="button" data-building="komersial" data-mult="1.4" class="building-btn p-3.5 rounded-2xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-slate-500 text-center transition-all">
+                                <i data-lucide="landmark" class="w-6 h-6 mx-auto mb-1.5 text-emerald-400"></i>
+                                <span class="text-xs font-semibold block">Gedung Komersial</span>
+                            </button>
+                            <button type="button" data-building="rumah" data-mult="0.8" class="building-btn p-3.5 rounded-2xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-slate-500 text-center transition-all">
+                                <i data-lucide="home" class="w-6 h-6 mx-auto mb-1.5 text-amber-400"></i>
+                                <span class="text-xs font-semibold block">Rumah / Ruko</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Jumlah Pengguna / Perangkat Aktif -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="user-count-slider" class="text-sm font-semibold text-slate-200">2. Estimasi Pengguna / Perangkat Terhubung</label>
+                            <span class="px-3 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono font-bold text-sm border border-cyan-500/30">
+                                <span id="user-count-display">50</span> Perangkat
+                            </span>
+                        </div>
+                        <input type="range" id="user-count-slider" min="10" max="500" step="10" value="50" class="w-full">
+                        <div class="flex justify-between text-[11px] text-slate-500 mt-1.5 font-mono">
+                            <span>10 Devices</span>
+                            <span>150 Devices</span>
+                            <span>300 Devices</span>
+                            <span>500+ Devices</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Kebutuhan Mekanikal & Elektrikal (ME) -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-3">3. Infrastruktur Kelistrikan &amp; Pendingin (ME)</label>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <label class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 cursor-pointer hover:border-indigo-500/50 transition-all">
+                                <input type="checkbox" id="chk-ups" checked class="mt-1 w-4 h-4 accent-cyan-400 rounded">
+                                <div>
+                                    <span class="text-sm font-semibold text-white block">UPS &amp; Panel Distribusi</span>
+                                    <span class="text-xs text-slate-400">Backup daya anti-mati lampu &amp; surge protector</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 cursor-pointer hover:border-indigo-500/50 transition-all">
+                                <input type="checkbox" id="chk-cooling" class="mt-1 w-4 h-4 accent-cyan-400 rounded">
+                                <div>
+                                    <span class="text-sm font-semibold text-white block">Server Rack &amp; Precision Cooling</span>
+                                    <span class="text-xs text-slate-400">Pendingin ruang server &amp; grounding petir</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 4. Keamanan Jaringan & Surveillance -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-3">4. Modul Keamanan Siber &amp; Fisik</label>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <label class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 cursor-pointer hover:border-emerald-500/50 transition-all">
+                                <input type="checkbox" id="chk-firewall" checked class="mt-1 w-4 h-4 accent-emerald-400 rounded">
+                                <div>
+                                    <span class="text-sm font-semibold text-white block">Next-Gen Firewall (NGFW)</span>
+                                    <span class="text-xs text-slate-400">Anti-DDoS, VPN Site-to-Site &amp; Content Filter</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/70 border border-slate-800 cursor-pointer hover:border-emerald-500/50 transition-all">
+                                <input type="checkbox" id="chk-cctv" class="mt-1 w-4 h-4 accent-emerald-400 rounded">
+                                <div>
+                                    <span class="text-sm font-semibold text-white block">Smart AI CCTV &amp; Access Control</span>
+                                    <span class="text-xs text-slate-400">Kamera IP PoE &amp; deteksi anomali 24/7</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel Hasil Rekomendasi (Kanan) -->
+                <div class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 border border-cyan-500/40 bg-gradient-to-b from-slate-900/95 to-slate-950">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase">Hasil Analisis Sistem</span>
+                            <h3 class="font-display font-bold text-xl text-white">Rekomendasi Arsitektur</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/15 flex items-center justify-center text-cyan-400">
+                            <i data-lucide="cpu" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+
+                    <!-- Spesifikasi Output -->
+                    <div class="space-y-4 mb-6">
+                        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Rekomendasi Bandwidth</span>
+                            <span class="font-display font-bold text-base text-cyan-400" id="res-bandwidth">150 Mbps Dedicated</span>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Topologi WiFi &amp; AP</span>
+                            <span class="font-semibold text-sm text-white" id="res-ap">4x WiFi 6 Enterprise AP</span>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Kapasitas Daya ME</span>
+                            <span class="font-semibold text-sm text-indigo-300" id="res-power">UPS 3 kVA + Panel 1 Phase</span>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Tingkat Proteksi Security</span>
+                            <span class="font-semibold text-sm text-emerald-400" id="res-security">NGFW Hardware + IPS</span>
+                        </div>
+                    </div>
+
+                    <!-- Estimasi Biaya -->
+                    <div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-500/15 to-indigo-500/15 border border-cyan-500/30 mb-6">
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-xs text-slate-300">Estimasi Langganan Bulanan:</span>
+                            <span class="font-display font-extrabold text-2xl text-white" id="res-monthly">Rp 3.500.000</span>
+                        </div>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-xs text-slate-400">Estimasi Instalasi Awal (ME &amp; Perangkat):</span>
+                            <span class="font-mono font-semibold text-sm text-cyan-300" id="res-setup">Rp 12.500.000</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-3 italic">*Estimasi bersifat indikatif. Harga final ditentukan setelah survei teknis lokasi.</p>
+                    </div>
+
+                    <button onclick="applyCalculatorToForm()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 transition-all">
+                        <span>Kunci Estimasi &amp; Jadwalkan Survei</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. KEUNGGULAN & STANDAR KEAMANAN ==================== -->
+    <section id="keunggulan" class="py-20 lg:py-28 bg-slate-950/60 border-t border-slate-800/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-400 font-semibold text-sm tracking-wider uppercase">Mengapa Memilih NEXUS</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                    Standar Enterprise &amp; Kepatuhan Keamanan
+                </h2>
+                <p class="text-slate-400 mt-3 text-sm sm:text-base">
+                    Kami tidak sekadar memasang kabel dan perangkat—kami menjamin kontinuitas bisnis Anda dengan standar internasional.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Keunggulan 1 -->
+                <div class="glass-card rounded-3xl p-6">
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-5">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-white mb-2">Sertifikasi ISO 27001 &amp; K3</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Manajemen keamanan informasi berstandar ISO 27001 serta kepatuhan penuh pada prosedur keselamatan kelistrikan (K3 Listrik).
+                    </p>
+                </div>
+
+                <!-- Keunggulan 2 -->
+                <div class="glass-card rounded-3xl p-6">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-5">
+                        <i data-lucide="headset" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-white mb-2">NOC &amp; SOC Siaga 24/7</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Pemantauan proaktif lalu lintas jaringan, suhu ruang server, dan mitigasi serangan siber secara real-time sepanjang tahun.
+                    </p>
+                </div>
+
+                <!-- Keunggulan 3 -->
+                <div class="glass-card rounded-3xl p-6">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5">
+                        <i data-lucide="file-check-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-white mb-2">SLA Ketat &amp; Transparan</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Garansi uptime hingga 99.98% dengan waktu respon penanganan darurat di lokasi (on-site) maksimal 2 jam untuk area tercover.
+                    </p>
+                </div>
+
+                <!-- Keunggulan 4 -->
+                <div class="glass-card rounded-3xl p-6">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-5">
+                        <i data-lucide="wrench" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-white mb-2">Engineer Bersertifikat</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Didukung tenaga ahli pemegang sertifikasi Cisco CCNA/CCNP, MikroTik MTCNA, Fortinet NSE, serta Ahli K3 Listrik.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 7. PORTOFOLIO PROYEK / STUDI KASUS ==================== -->
+    <section id="portofolio" class="py-20 lg:py-28 border-t border-slate-800/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+                <div>
+                    <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase">Rekam Jejak Terbukti</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                        Studi Kasus &amp; Proyek Unggulan
+                    </h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Klik pada masing-masing studi kasus untuk melihat detail arsitektur jaringan, kelistrikan, dan keamanan yang kami terapkan.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Proyek 1 -->
+                <div onclick="openProjectModal(0)" class="glass-card rounded-3xl overflow-hidden cursor-pointer group flex flex-col">
+                    <div class="relative h-48 bg-gradient-to-br from-cyan-900/50 via-slate-900 to-indigo-950 p-6 flex flex-col justify-between border-b border-slate-800">
+                        <div class="flex justify-between items-start">
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold border border-cyan-500/30">
+                                Data Center &amp; ME
+                            </span>
+                            <div class="w-9 h-9 rounded-full bg-slate-900/80 flex items-center justify-center text-slate-300 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono text-slate-400">Klien: PT Nusantara FinTech</div>
+                            <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-cyan-400 transition-colors">
+                                Infrastruktur Jaringan &amp; Kelistrikan Data Center Tier-2
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Pembangunan sistem kelistrikan redundan N+1, instalasi precision cooling, fiber optik 10Gbps dual-homing, serta firewall cluster.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">UPS 60 kVA</span>
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">10G Fiber</span>
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">FortiGate HA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyek 2 -->
+                <div onclick="openProjectModal(1)" class="glass-card rounded-3xl overflow-hidden cursor-pointer group flex flex-col">
+                    <div class="relative h-48 bg-gradient-to-br from-indigo-900/50 via-slate-900 to-emerald-950 p-6 flex flex-col justify-between border-b border-slate-800">
+                        <div class="flex justify-between items-start">
+                            <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold border border-indigo-500/30">
+                                Kawasan Industri
+                            </span>
+                            <div class="w-9 h-9 rounded-full bg-slate-900/80 flex items-center justify-center text-slate-300 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono text-slate-400">Klien: Cikarang Smart Manufacturing</div>
+                            <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-cyan-400 transition-colors">
+                                WiFi Mesh Pabrik &amp; Keamanan Siber OT/IT
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Cakupan WiFi roaming tanpa putus di area produksi 4 hektar, segmentasi VLAN mesin produksi, dan integrasi 120 kamera AI CCTV.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">45 Industrial AP</span>
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">Grounding Petir</span>
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">Zero Trust</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyek 3 -->
+                <div onclick="openProjectModal(2)" class="glass-card rounded-3xl overflow-hidden cursor-pointer group flex flex-col">
+                    <div class="relative h-48 bg-gradient-to-br from-emerald-900/50 via-slate-900 to-cyan-950 p-6 flex flex-col justify-between border-b border-slate-800">
+                        <div class="flex justify-between items-start">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-500/30">
+                                Smart Building
+                            </span>
+                            <div class="w-9 h-9 rounded-full bg-slate-900/80 flex items-center justify-center text-slate-300 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono text-slate-400">Klien: Menara Sudirman Graha</div>
+                            <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-cyan-400 transition-colors">
+                                Smart Office Integration &amp; Managed WiFi
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Otomasi panel pencahayaan &amp; HVAC gedung 18 lantai, internet dedicated multi-tenant, serta VPN Site-to-Site untuk 12 kantor cabang.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">BMS Automation</span>
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">WiFi 6E</span>
+                            <span class="text-[11px] px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">SD-WAN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 8. FORMULIR KONSULTASI / SURVEI & FOOTER ==================== -->
+    <section id="konsultasi" class="py-20 lg:py-28 bg-slate-950/80 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12">
+                
+                <!-- Info Kontak & NOC -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase">Hubungi Tim Ahli Kami</span>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                            Jadwalkan Survei Lokasi &amp; Konsultasi Gratis
+                        </h2>
+                        <p class="text-slate-400 mt-3 text-sm sm:text-base leading-relaxed">
+                            Diskusikan kebutuhan internet fiber, peremajaan panel kelistrikan (ME), atau audit keamanan jaringan perusahaan Anda bersama konsultan teknis kami.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl glass border border-slate-800">
+                            <div class="p-3 rounded-xl bg-cyan-500/15 text-cyan-400">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">Kantor Pusat &amp; NOC Center</h4>
+                                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                                    Nexus Cyber Tower Lt. 12, Kawasan Bisnis Terpadu Jl. Jend. Sudirman Kav. 45, Jakarta Selatan 12930
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl glass border border-slate-800">
+                            <div class="p-3 rounded-xl bg-emerald-500/15 text-emerald-400">
+                                <i data-lucide="phone-call" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">Hotline Sales &amp; NOC 24/7</h4>
+                                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                                    (021) 5088-9900 • WhatsApp: +62 811-9900-247
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl glass border border-slate-800">
+                            <div class="p-3 rounded-xl bg-indigo-500/15 text-indigo-400">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">Jam Operasional</h4>
+                                <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                                    Kantor &amp; Survei: Senin – Sabtu (08.00 – 18.00 WIB)<br>
+                                    <span class="text-emerald-400 font-medium">NOC &amp; Emergency Support: 24 Jam / 7 Hari</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulir Interaktif -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800">
+                        <form id="consultation-form" class="space-y-5">
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="input-name" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Nama Lengkap *</label>
+                                    <input type="text" id="input-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+                                </div>
+                                <div>
+                                    <label for="input-company" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Nama Perusahaan / Instansi</label>
+                                    <input type="text" id="input-company" placeholder="Contoh: PT Maju Bersama" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="input-phone" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">No. WhatsApp / Telepon *</label>
+                                    <input type="tel" id="input-phone" required placeholder="0812-xxxx-xxxx" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+                                </div>
+                                <div>
+                                    <label for="input-email" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Email Bisnis *</label>
+                                    <input type="email" id="input-email" required placeholder="budi@perusahaan.co.id" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="input-service" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Layanan / Paket yang Diminati *</label>
+                                <select id="input-service" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors">
+                                    <option value="Paket Terpadu (WiFi + ME + Security)">Paket Terpadu (WiFi + ME + Cyber Security)</option>
+                                    <option value="Enterprise Dedicated Fiber WiFi">Enterprise Dedicated Fiber WiFi</option>
+                                    <option value="Instalasi Mekanikal & Elektrikal (UPS/Genset/Panel)">Instalasi Mekanikal &amp; Elektrikal (UPS/Genset/Panel)</option>
+                                    <option value="Network Security, Firewall & CCTV AI">Network Security, Firewall &amp; CCTV AI</option>
+                                    <option value="Hasil Simulasi Kalkulator">Sesuai Hasil Simulasi Kalkulator Infrastruktur</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="input-notes" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Detail Kebutuhan &amp; Alamat Survei</label>
+                                <textarea id="input-notes" rows="4" placeholder="Ceritakan kebutuhan bandwidth, luas gedung, kapasitas daya listrik, atau jadwal survei yang diinginkan..." class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 transition-all hover:scale-[1.01]">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                                <span>Kirim Permintaan Survei &amp; Penawaran</span>
+                            </button>
+                        </form>
+
+                        <!-- Kotak Notifikasi Sukses (Pengganti alert) -->
+                        <div id="form-success-box" class="hidden mt-6 p-5 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-200">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Permintaan Berhasil Terkirim!</h4>
+                                    <p class="text-sm text-emerald-200/90 mt-1" id="form-success-msg">
+                                        Terima kasih. Tim Solution Architect kami akan menghubungi Anda maksimal dalam 1x2 jam kerja untuk konfirmasi jadwal survei lokasi.
+                                    </p>
+                                    <button type="button" onclick="resetConsultationForm()" class="mt-3 text-xs font-semibold underline text-cyan-300 hover:text-cyan-200">
+                                        Kirim permintaan lainnya
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-[#040711] border-t border-slate-800/90 pt-16 pb-10 text-sm text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800/80">
+                <!-- Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-600 flex items-center justify-center">
+                            <i data-lucide="cpu" class="w-5 h-5 text-slate-950"></i>
+                        </div>
+                        <span class="font-display font-extrabold text-lg text-white">NEXUS <span class="text-cyan-400">INFRA</span></span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-slate-400">
+                        Mitra strategis penyedia layanan Internet Fiber, Infrastruktur Mekanikal Elektrikal (ME), dan Keamanan Siber terintegrasi untuk korporasi, industri, dan hunian modern.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-emerald-400 font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>All Network &amp; Power Systems Operational</span>
+                    </div>
+                </div>
+
+                <!-- Tautan Cepat -->
+                <div>
+                    <h4 class="font-display font-bold text-white mb-4">Tautan Cepat</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#beranda" class="hover:text-cyan-400 transition-colors">Beranda</a></li>
+                        <li><a href="#layanan" class="hover:text-cyan-400 transition-colors">3 Pilar Layanan</a></li>
+                        <li><a href="#paket" class="hover:text-cyan-400 transition-colors">Paket WiFi &amp; Infrastruktur</a></li>
+                        <li><a href="#kalkulator" class="hover:text-cyan-400 transition-colors">Kalkulator Kebutuhan</a></li>
+                        <li><a href="#portofolio" class="hover:text-cyan-400 transition-colors">Studi Kasus Proyek</a></li>
+                    </ul>
+                </div>
+
+                <!-- Solusi Layanan -->
+                <div>
+                    <h4 class="font-display font-bold text-white mb-4">Solusi Utama</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#layanan" class="hover:text-cyan-400 transition-colors">Dedicated Fiber Internet</a></li>
+                        <li><a href="#layanan" class="hover:text-cyan-400 transition-colors">Managed WiFi Mesh Gedung</a></li>
+                        <li><a href="#layanan" class="hover:text-cyan-400 transition-colors">Instalasi Panel, UPS &amp; Genset</a></li>
+                        <li><a href="#layanan" class="hover:text-cyan-400 transition-colors">Precision Cooling &amp; Grounding</a></li>
+                        <li><a href="#layanan" class="hover:text-cyan-400 transition-colors">Next-Gen Firewall &amp; Audit Keamanan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal & Kepatuhan -->
+                <div>
+                    <h4 class="font-display font-bold text-white mb-4">Kepatuhan &amp; Lisensi</h4>
+                    <ul class="space-y-2.5 text-xs text-slate-400">
+                        <li>Izin Penyelenggara Jasa Akses Internet (ISP)</li>
+                        <li>Sertifikasi ISO/IEC 27001:2022</li>
+                        <li>Sertifikat Badan Usaha Jasa Konstruksi (SBUJK ME)</li>
+                        <li>Anggota APJII &amp; Asosiasi Kontraktor Listrik</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 PT Nexus Infra &amp; Net Security. Hak Cipta Dilindungi Undang-Undang.</p>
+                <div class="flex gap-6">
+                    <a href="#konsultasi" class="hover:text-slate-300">Kebijakan Privasi</a>
+                    <a href="#keunggulan" class="hover:text-slate-300">Syarat &amp; SLA</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL DETAIL PROYEK ==================== -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="glass-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 border border-cyan-500/40 relative animate-fade-in">
+            <button onclick="closeProjectModal()" aria-label="Tutup Modal" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <span id="modal-category" class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold border border-cyan-500/30">
+                Kategori
+            </span>
+            <h3 id="modal-title" class="font-display font-bold text-2xl text-white mt-3">Judul Proyek</h3>
+            <p id="modal-client" class="text-xs font-mono text-slate-400 mt-1">Klien</p>
+            
+            <div class="mt-5 space-y-4 text-sm text-slate-300 leading-relaxed">
+                <p id="modal-desc"></p>
+                <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+                    <h4 class="font-semibold text-white text-xs uppercase tracking-wider mb-2.5 text-cyan-400">Ruang Lingkup Pekerjaan (WiFi, ME &amp; Security):</h4>
+                    <ul id="modal-specs" class="space-y-2 text-xs text-slate-300 list-disc list-inside"></ul>
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end gap-3">
+                <button onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium">
+                    Tutup
+                </button>
+                <a href="#konsultasi" onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-sm font-bold">
+                    Konsultasi Proyek Serupa
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT INTERAKTIF ==================== -->
+    <script>
+        // Inisialisasi Lucide Icons
+        lucide.createIcons();
+
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // 2. Hero Canvas Network Animation (Ringan & Responsif)
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            initParticles();
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(28, Math.floor(canvas.width / 16));
+            const colors = ['#00E5FF', '#818CF8', '#10B981'];
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.8,
+                    vy: (Math.random() - 0.5) * 0.8,
+                    radius: Math.random() * 2 + 1.5,
+                    color: colors[i % colors.length]
+                });
+            }
+        }
+
+        function animateNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                // Draw node
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+
+                // Connect nearby nodes
+                for (let j = i + 1; j < particles.length; j++) {
+                    let p2 = particles[j];
+                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 85) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(0, 229, 255, ${0.28 * (1 - dist / 85)})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateNetwork);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            animateNetwork();
+        });
+
+        // Simulasi update statistik kecil secara live
+        setInterval(() => {
+            const pingEl = document.getElementById('live-ping');
+            const blockedEl = document.getElementById('live-blocked');
+            if (pingEl) {
+                const ping = (2.1 + Math.random() * 0.6).toFixed(1);
+                pingEl.textContent = `${ping} ms`;
+            }
+            if (blockedEl) {
+                const current = parseInt(blockedEl.textContent.replace(/,/g, ''), 10);
+                blockedEl.textContent = (current + Math.floor(Math.random() * 3)).toLocaleString('en-US');
+            }
+        }, 3500);
+
+        // 3. Data & Logika 3 Pilar Layanan (Interactive Tabs)
+        const serviceData = {
+            wifi: {
+                badge: 'Konektivitas Tanpa Batas',
+                badgeColor: 'text-cyan-400 bg-cyan-500/15 border-cyan-500/30',
+                title: 'Enterprise & Home Fiber WiFi',
+                desc: 'Koneksi internet fiber optik berkecepatan tinggi dengan rasio simetris (1:1), latensi rendah, dan arsitektur WiFi Mesh tanpa dead-zone untuk seluruh lantai gedung maupun hunian.',
+                features: [
+                    { title: 'Dedicated Internet Access (DIA)', detail: 'Bandwidth simetris 1:1 dengan IP Public Static dan jalur fiber ganda (dual-homing).' },
+                    { title: 'Managed WiFi 6 / 6E Mesh', detail: 'Seamless roaming antar lantai dengan controller terpusat dan portal login tamu (Captive Portal).' },
+                    { title: 'SD-WAN & Bandwidth Management', detail: 'Prioritas trafik otomatis untuk aplikasi krusial seperti ERP, VoIP, dan Video Conference.' },
+                    { title: 'Broadband Bisnis & SOHO', detail: 'Paket ekonomis tanpa batasan kuota (Unlimited FUP-free) untuk ruko, kafe, dan kantor cabang.' }
+                ]
+            },
+            me: {
+                badge: 'Infrastruktur Daya & Gedung',
+                badgeColor: 'text-indigo-400 bg-indigo-500/15 border-indigo-500/30',
+                title: 'Mekanikal & Elektrikal (ME)',
+                desc: 'Perancangan dan instalasi sistem kelistrikan serta tata udara presisi untuk menjamin perangkat jaringan, server, dan operasional bisnis tetap menyala 24/7.',
+                features: [
+                    { title: 'Panel Listrik & Distribusi Daya', detail: 'Perakitan panel LVMDP/SDP, penataan kabel terstruktur (structured cabling), dan manajemen beban.' },
+                    { title: 'Sistem UPS & Genset Otomatis (ATS/AMF)', detail: 'Backup daya tanpa jeda (zero transfer time) dengan sinkronisasi genset otomatis saat PLN padam.' },
+                    { title: 'Precision Cooling Ruang Server', detail: 'Instalasi HVAC & AC presisi untuk menjaga suhu dan kelembapan optimal perangkat server.' },
+                    { title: 'Grounding & Penangkal Petir Elektrostatis', detail: 'Proteksi lonjakan arus (Surge Arrester) dan sistem pembumian < 1 Ohm sesuai standar PUIL.' }
+                ]
+            },
+            security: {
+                badge: 'Pertahanan Siber & Fisik',
+                badgeColor: 'text-emerald-400 bg-emerald-500/15 border-emerald-500/30',
+                title: 'Network & Cyber Security',
+                desc: 'Perlindungan berlapis dari ancaman peretasan, ransomware, hingga pengawasan fisik berbasis kecerdasan buatan yang terintegrasi langsung ke jaringan Anda.',
+                features: [
+                    { title: 'Next-Generation Firewall (NGFW)', detail: 'Inspeksi paket mendalam (DPI), Intrusion Prevention System (IPS), dan proteksi anti-malware real-time.' },
+                    { title: 'Zero Trust & VPN Site-to-Site', detail: 'Koneksi terenkripsi antar kantor cabang dan autentikasi ketat untuk pekerja jarak jauh (remote).' },
+                    { title: 'Audit Keamanan & Penetration Testing', detail: 'Deteksi celah kerentanan jaringan, segmentasi VLAN, dan kepatuhan standar keamanan data.' },
+                    { title: 'Smart AI CCTV & Access Control', detail: 'Kamera pengawas IP PoE resolusi 4K dengan analitik deteksi wajah, intrusi area, dan pintu biometrik.' }
+                ]
+            }
+        };
+
+        function switchServiceTab(key) {
+            const data = serviceData[key];
+            const container = document.getElementById('service-tab-content');
+            
+            // Update button styling
+            document.querySelectorAll('.service-tab-btn').forEach(btn => {
+                btn.className = 'service-tab-btn flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-semibold text-sm transition-all glass text-slate-300 hover:text-white border border-slate-700';
+            });
+            const activeBtn = document.getElementById(`tab-btn-${key}`);
+            activeBtn.className = 'service-tab-btn active flex items-center gap-2.5 px-6 py-3.5 rounded-2xl font-bold text-sm transition-all bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25';
+
+            // Render content
+            container.innerHTML = `
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="inline-block px-3.5 py-1 rounded-full text-xs font-semibold border ${data.badgeColor}">
+                            ${data.badge}
+                        </span>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white">${data.title}</h3>
+                        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">${data.desc}</p>
+                        <div class="pt-2">
+                            <a href="#konsultasi" onclick="selectServiceInForm('${data.title}')" class="inline-flex items-center gap-2 text-sm font-bold text-cyan-400 hover:text-cyan-300">
+                                <span>Konsultasikan Layanan Ini</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+                        ${data.features.map(f => `
+                            <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/30 transition-all">
+                                <div class="flex items-center gap-2.5 mb-2">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                                    <h4 class="font-display font-bold text-base text-white">${f.title}</h4>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">${f.detail}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+        // Load tab pertama saat halaman dibuka
+        switchServiceTab('wifi');
+
+        // 4. Data & Toggle Paket Layanan WiFi & Infrastruktur
+        const pricingData = {
+            bisnis: [
+                {
+                    name: 'Business Pro 100',
+                    speed: '100 Mbps',
+                    ratio: 'Simetris 1:1 Dedicated',
+                    price: 'Rp 2.450.000',
+                    period: '/bulan',
+                    popular: false,
+                    features: [
+                        '1 IP Public Static',
+                        'Basic Next-Gen Firewall Protection',
+                        '1x Enterprise WiFi 6 Access Point',
+                        'SLA Uptime 99.9% + Support 24/7',
+                        'Gratis Pengecekan Panel Listrik Awal'
+                    ]
+                },
+                {
+                    name: 'Enterprise Shield 300',
+                    speed: '300 Mbps',
+                    ratio: 'Simetris 1:1 + Anti-DDoS',
+                    price: 'Rp 5.900.000',
+                    period: '/bulan',
+                    popular: true,
+                    features: [
+                        'Block 4 IP Public Static',
+                        'Dedicated Hardware Firewall & VPN',
+                        '3x Managed WiFi 6 Mesh AP',
+                        'Backup UPS 2 kVA untuk Perangkat Core',
+                        'SLA Uptime 99.98% (Respon < 2 Jam)'
+                    ]
+                },
+                {
+                    name: 'Corporate Core 1 Gbps',
+                    speed: '1 Gbps',
+                    ratio: 'Dual-Homing Backbone',
+                    price: 'Rp 14.500.000',
+                    period: '/bulan',
+                    popular: false,
+                    features: [
+                        'Block 8 IP Public + BGP Routing',
+                        'Zero Trust Security & AI Threat Monitor',
+                        'Full Gedung WiFi Mesh + Rack Server',
+                        'Integrasi UPS N+1 & Grounding Audit',
+                        'Dedicated Account & NOC Engineer'
+                    ]
+                }
+            ],
+            soho: [
+                {
+                    name: 'Home Cyber 50',
+                    speed: '50 Mbps',
+                    ratio: 'Unlimited Tanpa FUP',
+                    price: 'Rp 450.000',
+                    period: '/bulan',
+                    popular: false,
+                    features: [
+                        'Router WiFi 6 Dual-Band',
+                        'DNS Safe-Browsing & Parental Filter',
+                        'Gratis Instalasi Kabel Fiber',
+                        'Dukungan Teknis 24/7'
+                    ]
+                },
+                {
+                    name: 'SOHO & Ruko 150',
+                    speed: '150 Mbps',
+                    ratio: 'Prioritas Trafik Kerja',
+                    price: 'Rp 950.000',
+                    period: '/bulan',
+                    popular: true,
+                    features: [
+                        '2x WiFi Mesh Node (Jangkauan 3 Lantai)',
+                        'Proteksi Malware & Phishing Tingkat Router',
+                        'Mini UPS Backup Modem & Router (4 Jam)',
+                        '1 IP Public Dynamic / VPN Ready'
+                    ]
+                },
+                {
+                    name: 'Smart Villa & Clinic 300',
+                    speed: '300 Mbps',
+                    ratio: 'High-Density Devices',
+                    price: 'Rp 1.750.000',
+                    period: '/bulan',
+                    popular: false,
+                    features: [
+                        '3x WiFi 6 Mesh + VLAN Tamu Terpisah',
+                        'Integrasi 4 Kamera AI CCTV Cloud',
+                        'Surge Protector Kelistrikan Utama',
+                        'Prioritas Kunjungan Teknisi'
+                    ]
+                }
+            ]
+        };
+
+        function togglePricingCategory(category) {
+            const btnBisnis = document.getElementById('btn-cat-bisnis');
+            const btnSoho = document.getElementById('btn-cat-soho');
+
+            if (category === 'bisnis') {
+                btnBisnis.className = 'px-5 py-2.5 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950 transition-all';
+                btnSoho.className = 'px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white transition-all';
+            } else {
+                btnSoho.className = 'px-5 py-2.5 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950 transition-all';
+                btnBisnis.className = 'px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white transition-all';
+            }
+
+            const grid = document.getElementById('pricing-cards-grid');
+            grid.innerHTML = pricingData[category].map(plan => `
+                <div class="relative glass-card rounded-3xl p-7 flex flex-col justify-between ${plan.popular ? 'border-2 border-cyan-400 shadow-xl shadow-cyan-500/15' : 'border border-slate-800'}">
+                    ${plan.popular ? `
+                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 text-slate-950 text-xs font-extrabold tracking-wide uppercase shadow-md">
+                            Paling Populer
+                        </div>
+                    ` : ''}
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-display font-bold text-xl text-white">${plan.name}</h3>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyan-500/15 text-cyan-300 font-mono text-xs font-bold">${plan.speed}</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-5">${plan.ratio}</p>
+                        
+                        <div class="pb-6 mb-6 border-b border-slate-800">
+                            <span class="font-display font-extrabold text-3xl text-white">${plan.price}</span>
+                            <span class="text-xs text-slate-400">${plan.period}</span>
+                        </div>
+
+                        <ul class="space-y-3.5 mb-8">
+                            ${plan.features.map(feat => `
+                                <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                                    <span>${feat}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <button onclick="choosePackage('${plan.name} (${plan.speed})')" class="w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.popular ? 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-lg shadow-cyan-500/20' : 'bg-slate-800 hover:bg-slate-700 text-white'}">
+                        Pilih Paket Ini
+                    </button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+        togglePricingCategory('bisnis');
+
+        function choosePackage(packageName) {
+            const notesEl = document.getElementById('input-notes');
+            const serviceEl = document.getElementById('input-service');
+            serviceEl.value = 'Paket Terpadu (WiFi + ME + Security)';
+            notesEl.value = `Halo Tim NEXUS, saya tertarik berlangganan paket: ${packageName}. Mohon info ketersediaan jaringan dan jadwal survei lokasi.`;
+            document.getElementById('konsultasi').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectServiceInForm(serviceTitle) {
+            document.getElementById('input-notes').value = `Saya ingin berkonsultasi mengenai layanan: ${serviceTitle}.`;
+        }
+
+        // 5. Logika Kalkulator Kebutuhan Infrastruktur
+        let selectedBuilding = { name: 'Kantor / Office', mult: 1.2 };
+
+        document.querySelectorAll('.building-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.building-btn').forEach(b => {
+                    b.className = 'building-btn p-3.5 rounded-2xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-slate-500 text-center transition-all';
+                });
+                btn.className = 'building-btn active p-3.5 rounded-2xl border border-cyan-500 bg-cyan-500/15 text-white text-center transition-all';
+                selectedBuilding = {
+                    name: btn.querySelector('span').textContent,
+                    mult: parseFloat(btn.dataset.mult)
+                };
+                calculateInfrastructure();
+            });
+        });
+
+        const userSlider = document.getElementById('user-count-slider');
+        const chkUps = document.getElementById('chk-ups');
+        const chkCooling = document.getElementById('chk-cooling');
+        const chkFirewall = document.getElementById('chk-firewall');
+        const chkCctv = document.getElementById('chk-cctv');
+
+        [userSlider, chkUps, chkCooling, chkFirewall, chkCctv].forEach(el => {
+            el.addEventListener('input', calculateInfrastructure);
+            el.addEventListener('change', calculateInfrastructure);
+        });
+
+        function formatRupiah(angka) {
+            return 'Rp ' + Math.round(angka).toLocaleString('id-ID');
+        }
+
+        function calculateInfrastructure() {
+            const users = parseInt(userSlider.value, 10);
+            document.getElementById('user-count-display').textContent = users >= 500 ? '500+' : users;
+
+            // Kalkulasi Bandwidth (Mbps)
+            const rawBw = Math.ceil((users * 3 * selectedBuilding.mult) / 50) * 50;
+            const bwLabel = rawBw >= 1000 ? `${(rawBw / 1000).toFixed(1)} Gbps Dedicated` : `${Math.max(50, rawBw)} Mbps Dedicated`;
+
+            // Kalkulasi Access Point
+            const apCount = Math.max(2, Math.ceil(users / 25));
+
+            // Kalkulasi Daya ME
+            let powerDesc = 'Panel Standar + Grounding';
+            if (chkUps.checked && chkCooling.checked) {
+                const kva = Math.max(5, Math.ceil(users / 20));
+                powerDesc = `UPS ${kva} kVA + Precision Cooling`;
+            } else if (chkUps.checked) {
+                const kva = Math.max(3, Math.ceil(users / 35));
+                powerDesc = `UPS ${kva} kVA + Panel Distribusi`;
+            } else if (chkCooling.checked) {
+                powerDesc = 'Rack Server + AC Presisi';
+            }
+
+            // Kalkulasi Keamanan
+            let secDesc = 'Firewall Standar Router';
+            if (chkFirewall.checked && chkCctv.checked) {
+                secDesc = 'NGFW Hardware + AI CCTV PoE';
+            } else if (chkFirewall.checked) {
+                secDesc = 'Next-Gen Firewall (IPS & VPN)';
+            } else if (chkCctv.checked) {
+                secDesc = 'Smart AI CCTV + VLAN Isolasi';
+            }
+
+            // Estimasi Biaya Bulanan & Setup
+            let monthlyCost = (rawBw * 18000) + (apCount * 150000);
+            if (chkFirewall.checked) monthlyCost += 850000;
+            if (chkCctv.checked) monthlyCost += 600000;
+
+            let setupCost = (apCount * 2200000) + 3500000;
+            if (chkUps.checked) setupCost += 6500000 * selectedBuilding.mult;
+            if (chkCooling.checked) setupCost += 12000000;
+            if (chkFirewall.checked) setupCost += 5500000;
+            if (chkCctv.checked) setupCost += 7500000;
+
+            document.getElementById('res-bandwidth').textContent = bwLabel;
+            document.getElementById('res-ap').textContent = `${apCount}x WiFi 6 Enterprise AP`;
+            document.getElementById('res-power').textContent = powerDesc;
+            document.getElementById('res-security').textContent = secDesc;
+            document.getElementById('res-monthly').textContent = formatRupiah(monthlyCost);
+            document.getElementById('res-setup').textContent = formatRupiah(setupCost);
+        }
+        calculateInfrastructure();
+
+        function applyCalculatorToForm() {
+            const users = document.getElementById('user-count-display').textContent;
+            const bw = document.getElementById('res-bandwidth').textContent;
+            const power = document.getElementById('res-power').textContent;
+            const sec = document.getElementById('res-security').textContent;
+            const monthly = document.getElementById('res-monthly').textContent;
+
+            document.getElementById('input-service').value = 'Hasil Simulasi Kalkulator';
+            document.getElementById('input-notes').value = 
+                `Permintaan Survei Berdasarkan Simulasi Kalkulator:\n` +
+                `- Jenis Bangunan: ${selectedBuilding.name}\n` +
+                `- Jumlah Perangkat: ${users} Devices\n` +
+                `- Rekomendasi Bandwidth: ${bw}\n` +
+                `- Infrastruktur ME: ${power}\n` +
+                `- Keamanan Jaringan: ${sec}\n` +
+                `- Estimasi Bulanan: ${monthly}`;
+
+            document.getElementById('konsultasi').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 6. Modal Detail Portofolio Proyek
+        const projectsDetail = [
+            {
+                category: 'Data Center & Mekanikal Elektrikal',
+                title: 'Infrastruktur Jaringan & Kelistrikan Data Center Tier-2',
+                client: 'PT Nusantara FinTech Indonesia • Jakarta',
+                desc: 'Merancang dan membangun ruang server utama berstandar Tier-2 dengan redundansi penuh pada jalur kelistrikan maupun koneksi fiber optik untuk menjamin transaksi finansial tanpa henti.',
+                specs: [
+                    'Instalasi 2 unit UPS Modular 60 kVA konfigurasi N+1 dan sinkronisasi Genset 150 kVA.',
+                    'Pemasangan sistem Precision Air Conditioning (PAC) dengan sensor suhu otomatis.',
+                    'Koneksi Internet Dedicated 10 Gbps Dual-Homing dari 2 jalur ISP berbeda (BGP Routing).',
+                    'Implementasi High-Availability Next-Gen Firewall (Active-Passive) serta akses pintu biometrik.'
+                ]
+            },
+            {
+                category: 'Kawasan Industri & Manufaktur',
+                title: 'WiFi Mesh Pabrik & Keamanan Siber OT/IT',
+                client: 'Cikarang Smart Manufacturing • Bekasi',
+                desc: 'Menghilangkan blank-spot sinyal WiFi untuk operasional barcode scanner dan AGV (Automated Guided Vehicle) di area pabrik seluas 4 hektar, sekaligus memisahkan jaringan mesin industri dari ancaman malware.',
+                specs: [
+                    'Pemasangan 45 unit Industrial Outdoor/Indoor WiFi 6 Access Point tahan debu & panas.',
+                    'Instalasi sistem penangkal petir elektrostatis dan grounding khusus ruang kontrol (< 0.8 Ohm).',
+                    'Segmentasi jaringan IT (Kantor) dan OT (Mesin Produksi) menggunakan kebijakan Zero Trust.',
+                    'Integrasi 120 kamera AI CCTV PoE dengan analitik deteksi APD dan perimeter keamanan.'
+                ]
+            },
+            {
+                category: 'Smart Building & Korporasi',
+                title: 'Smart Office Integration & Managed WiFi',
+                client: 'Menara Sudirman Graha • Jakarta Pusat',
+                desc: 'Transformasi gedung perkantoran 18 lantai menjadi ekosistem kerja cerdas yang hemat energi, aman secara siber, dan memiliki konektivitas berkecepatan tinggi di seluruh ruang rapat maupun area publik.',
+                specs: [
+                    'Otomasi panel kelistrikan (Building Management System) untuk efisiensi daya HVAC & pencahayaan hingga 28%.',
+                    'Distribusi jaringan fiber optik backbone antar lantai dengan switch PoE+ terkelola.',
+                    'Konfigurasi SD-WAN dan VPN Site-to-Site terenkripsi yang menghubungkan 12 kantor cabang di seluruh Indonesia.',
+                    'Sistem Captive Portal tamu terintegrasi dan pemantauan NOC 24/7.'
+                ]
+            }
+        ];
+
+        function openProjectModal(index) {
+            const proj = projectsDetail[index];
+            document.getElementById('modal-category').textContent = proj.category;
+            document.getElementById('modal-title').textContent = proj.title;
+            document.getElementById('modal-client').textContent = proj.client;
+            document.getElementById('modal-desc').textContent = proj.desc;
+            document.getElementById('modal-specs').innerHTML = proj.specs.map(s => `<li>${s}</li>`).join('');
+            
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 7. Penanganan Form Konsultasi (Tanpa alert)
+        const consultationForm = document.getElementById('consultation-form');
+        const successBox = document.getElementById('form-success-box');
+
+        consultationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('input-name').value.trim();
+            const service = document.getElementById('input-service').value;
+
+            document.getElementById('form-success-msg').textContent = 
+                `Terima kasih Bapak/Ibu ${name}. Permintaan survei untuk layanan "${service}" telah masuk ke sistem NOC & Solution Architect kami. Tim kami akan menghubungi nomor WhatsApp Anda dalam waktu maksimal 1x2 jam kerja.`;
+
+            consultationForm.classList.add('hidden');
+            successBox.classList.remove('hidden');
+            lucide.createIcons();
+        });
+
+        function resetConsultationForm() {
+            consultationForm.reset();
+            successBox.classList.add('hidden');
+            consultationForm.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
